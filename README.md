@@ -4,7 +4,7 @@ width=30> Adding User Management and Auth
 
 ## Description
 
-For this assignment, you'll be securing a new express-mongoose REST API data server that you'll be creating. 
+For this assignment, you'll be securing a previous REST API data server that you created. 
 You can pick the data/resource that you want to expose, but create something new for this 
 assignment. Provide at least following CRUD methods: get all, get, add new (post).
 
