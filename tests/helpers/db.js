@@ -1,3 +1,3 @@
 // database helpers
 // - drop db
-// - get token
+// - get token - use token service?
