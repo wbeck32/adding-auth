@@ -25,6 +25,7 @@
   "homepage": "https://github.com/wbeck32/adding-auth#readme",
   "devDependencies": {
     "bcryptjs": "^2.4.3",
+    "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "jsonwebtoken-promisified": "^1.0.3",
