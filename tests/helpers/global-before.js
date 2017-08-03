@@ -1,16 +1,12 @@
-process.env.MONGODB_URI = 'mongodb://localhost:27017/adding-auth';
-require('../../lib/connect');
-const connection = require('mongoose')
-    .connection;
-// const testHelper = require('./test-helper');
+const connect = require('../../lib/connect');
+const dbUri = 'mongodb://localhost:27017/adding-auth';
+const db = require('./db');
 
 before(() => {
-    connection;
-    connection.dropDatabase();
-
-
+  connect(dbUri);
+  db.dropDb();
 });
 
-after(()=>{
-    connection.close();
-})
+after(() => {
+  // connect.close();
+});

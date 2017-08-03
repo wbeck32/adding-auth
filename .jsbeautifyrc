@@ -8,8 +8,7 @@
     "break_chained_methods": true,
     "space_in_empty_paren": true,
     "brace_style": "collapse,preserve-inline",
-    "max_preserve_newlines": 2,
     "indent_size": 4,
-    "keep_function_indentation":true
+    "keep_function_indentation": true
   }
 }

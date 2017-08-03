@@ -1,4 +1,4 @@
-const request = require('../helpers/request');
+const req = require('../helpers/request');
 const chai = require('chai');
 const assert = chai.assert;
 
@@ -6,11 +6,12 @@ describe('user security API', () => {
   let token = '';
 
   before(() => {
-    return request
-      .post('/auth/signup')
+    return req
+      .post('/users/signup')
       .send({
         email: 'me@me.com',
-        password: 'abc'
+        password: 'abc',
+        roles: [{ admin: 0, manager: 1, peon: 1 }]
       })
       .then(res => {
         token = res.body.token;
@@ -18,7 +19,7 @@ describe('user security API', () => {
   });
 
   it('creates a token', () => {
-    console.log('token: ', token);
+    // console.log('token: ', token);
   }), it('validates a user creating an account then adds them', () => {
     //check for unique user name/email
     //sends user info in payload
