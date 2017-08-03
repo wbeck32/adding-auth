@@ -1,8 +1,10 @@
+require('dotenv').config();
 const http = require('http');
 const app = require('./lib/app');
 const connect = require('./lib/connect');
 
-const dbUri = 'mongodb://localhost:27017/adding-auth';
+
+const dbUri = process.env.MONGO_URI;
 connect(dbUri);
 
 const server = http.createServer(app);
