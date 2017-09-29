@@ -16,7 +16,6 @@ describe('user security API', () => {
   });
 
   it('creates a user with roles', async () => {
-    console.log(33, seedPeople[1])
     const roleUser = await req.post('/users/signup').send(seedPeople[1]);
     const token = roleUser.body.token;
     assert.isOk(token);
@@ -28,20 +27,19 @@ describe('user security API', () => {
     }),
     it('checks credentials then retrieves the user', async () => {
       const checkCreds = await req.post('/users/signup').send(seedPeople[3]);
-      return verify(checkCreds.body.token, () => {
-        assert.equal(authedUser.roles.admin, true);
-        assert.equal(authedUser.roles.manager, false);
-        return
-      })
+      const authedUser = await verify(checkCreds.body.token);
+      assert.equal(authedUser.roles.admin, true);
+      assert.equal(authedUser.roles.manager, false);
     }),
     it('gets all users', async () => {
       const allUsers = await req.get('/users');
       assert.equal(allUsers.body.length, 2);
     }),
     it('checks user role', async () => {
-      const haveRoles = await req.get('/users').query({ 'roles.manager': true});
-      assert.equal(haveRoles.body[0].roles.manager, true)
-      assert.equal(haveRoles.body.length, 1)
+      const haveRoles = await req
+        .get('/users')
+        .query({ 'roles.manager': true });
+      assert.equal(haveRoles.body[0].roles.manager, true);
+      assert.equal(haveRoles.body.length, 1);
     });
 });
-
