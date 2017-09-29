@@ -16,6 +16,7 @@ describe('user security API', () => {
   });
 
   it('creates a user with roles', async () => {
+    console.log(33, seedPeople[1])
     const roleUser = await req.post('/users/signup').send(seedPeople[1]);
     const token = roleUser.body.token;
     assert.isOk(token);
