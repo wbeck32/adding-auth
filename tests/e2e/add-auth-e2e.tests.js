@@ -27,9 +27,11 @@ describe('user security API', () => {
     }),
     it('checks credentials then retrieves the user', async () => {
       const checkCreds = await req.post('/users/signup').send(seedPeople[3]);
-      const authedUser = await verify(checkCreds.body.token);
-      assert.equal(authedUser.roles.admin, true);
-      assert.equal(authedUser.roles.manager, false);
+      return verify(checkCreds.body.token, () => {
+      }).then(authedUser, () => {
+        assert.equal(authedUser.roles.admin, true);
+        assert.equal(authedUser.roles.manager, false);
+      })
     }),
     it('gets all users', async () => {
       const allUsers = await req.get('/users');
