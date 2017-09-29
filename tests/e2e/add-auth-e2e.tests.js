@@ -7,7 +7,6 @@ const { drop } = require('../helpers/db');
 const seedPeople = require('../helpers/test-data');
 const { verify } = require('../../lib/auth/token-service');
 
-
 describe('user security API', () => {
   let token = '';
 
@@ -15,7 +14,6 @@ describe('user security API', () => {
     connect(dbUri);
     drop();
   });
-
 
   it('creates a user with roles', async () => {
     const roleUser = await req.post('/users/signup').send(seedPeople[1]);
@@ -29,20 +27,18 @@ describe('user security API', () => {
     }),
     it('checks credentials then retrieves the user', async () => {
       const checkCreds = await req.post('/users/signup').send(seedPeople[3]);
-
       const authedUser = await verify(checkCreds.body.token);
-      assert.equal(authedUser.roles.length, 1);
-      assert.equal(authedUser.roles[0].peon, true);
+      assert.equal(authedUser.roles.admin, true);
+      assert.equal(authedUser.roles.manager, false);
     }),
     it('gets all users', async () => {
       const allUsers = await req.get('/users');
       assert.equal(allUsers.body.length, 2);
     }),
-    it('checks user role', () => {
-
+    it('checks user role', async () => {
+      const haveRoles = await req.get('/users').query({ 'roles.manager': true});
+      assert.equal(haveRoles.body[0].roles.manager, true)
+      assert.equal(haveRoles.body.length, 1)
     });
 });
 
-// get all, get, add new (post).
-// signup, sign in
-// Bonus: checks user role, allows special access
