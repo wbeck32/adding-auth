@@ -1,11 +1,8 @@
-// database helpers
-// - drop db
-// - get token - use token service?
-
 const connection = require('mongoose').connection;
 
+/* export a small helper for dropping the db*/
 module.exports = {
-  dropDb() {
-    return connection.dropDatabase();
-  }
+    drop() {
+        return connection.dropDatabase();
+    }
 };
