@@ -16,9 +16,15 @@ describe('user security API', () => {
   });
 
   it('creates a user with roles', async () => {
-    const roleUser = await req.post('/users/signup').send(seedPeople[1]);
-    const token = roleUser.body.token;
-    assert.isOk(token);
+    // const roleUser = await
+    return req
+      .post('/users/signup')
+      .send(seedPeople[1])
+      .then(result => {
+        const token = result.body.token;
+        assert.isOk(token);
+        return;
+      });
   }),
     it("fails if user doesn't have both email and pw", async () => {
       const fail = await req.post('/users/verify').send(seedPeople[2]);
